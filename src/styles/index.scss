@@ -1,8 +1,25 @@
 @use 'variables' as v;
 
+* {
+  box-sizing: border-box;
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: v.$textFont;
+  font-size: v.$rootTextFontSize;
   line-height: 1;
   font-weight: 400;
 }
+body {
+  background: v.$mainBg;
+}
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: v.$titleFont;
+  color: v.$titleColor;
+}

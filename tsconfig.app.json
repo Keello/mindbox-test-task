@@ -21,7 +21,18 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    "baseUrl": "src/",
+    "paths": {
+      "@pages/*": ["pages/*"],
+      "@modules/*": ["modules/*"],
+      "@components/*": ["components/*"],
+      "@ui/*": ["ui/*"],
+      "@api/*": ["api/*"],
+      "@services/*": ["services/*"],
+      "@hooks/*": ["hooks/*"],
+    }
   },
   "include": ["src", "vite-env.d.ts"]
 }

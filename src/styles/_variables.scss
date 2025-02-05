@@ -6,12 +6,14 @@ $xl: 1200px;
 $xxl: 1600px;
 
 //---------------------Colors----------------------
-$g-mainBg: rgb(240, 242, 245);
-
+$mainBg: rgb(245, 245, 245);
+$titleColor: rgb(233, 218, 217);
+$loaderColor: black;
 //--------------------Fonts-------------------------
-$g-titleFont: 'Montserrat', sans-serif;
-$g-titleFontSize: 1.5rem;
-$g-textFont: 'Montserrat', sans-serif;
-$g-textFontSize: 1rem;
+$titleFont: 'CreatoDisplay', sans-serif;
+$titleFontSize: 1.5rem;
+$textFont: 'Montserrat', sans-serif;
+$textFontSize: 1rem;
+$rootTextFontSize: 14px;
 
 //--------------------Other-------------------------

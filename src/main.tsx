@@ -3,6 +3,6 @@ import 'normalize.css';
 import './styles/_fonts.scss';
 import './styles/index.scss';
 
-import App from './components/App.tsx';
+import MainPage from '@pages/mainPage/mainPage';
 
-createRoot(document.getElementById('root')!).render(<App />);
+createRoot(document.getElementById('root')!).render(<MainPage />);
