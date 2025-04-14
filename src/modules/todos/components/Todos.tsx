@@ -1,22 +1,34 @@
 import { useEffect, useState } from 'react';
-import TodosService from '../services/TodosService';
+import TodosList from './todosList/TodosList';
 import TodosFilter from './todosFilter/TodosFilter';
-import { TodosFilterType } from '../types';
+import TodosService from '../services/TodosService';
+
+import type { TodoFilterType, TodoType } from '../types';
 
 const Todos = () => {
-  const [filter, setFilter] = useState<TodosFilterType>('All');
+  const todoService = new TodosService();
 
-  const fetchTodos = async () => {
-    const response = await TodosService.getTodos();
-  };
+  const [filter, setFilter] = useState<TodoFilterType>('All');
+  const [todos, setTodos] = useState<TodoType[]>([]);
+
   useEffect(() => {
     fetchTodos();
   }, []);
 
+  const fetchTodos = async () => {
+    try {
+      const response = await todoService.getTodos(15);
+      if (response) {
+        setTodos(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div>
-        list
         {/* <div className={`${classes.card} ${active ? classes.card_active : ''}`}>
       <div className={classes.card__body}>
         <h5 className={classes.card__title}>{activeCard[0].title}</h5>
@@ -28,6 +40,7 @@ const Todos = () => {
       </div>
     </div> */}
       </div>
+      <TodosList todos={todos} />
       <TodosFilter filter={filter} onChange={setFilter} />
     </>
   );

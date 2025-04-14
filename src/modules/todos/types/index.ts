@@ -1,8 +1,8 @@
-export type TodosType = {
+export type TodoType = {
   id: number;
   title: string;
   userId: number;
   completed: boolean;
 };
 
-export type TodosFilterType = 'All' | 'Active' | 'Completed';
+export type TodoFilterType = 'All' | 'Active' | 'Completed';

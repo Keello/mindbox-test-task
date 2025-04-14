@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import styles from './TodosFilter.module.scss';
-import { TodosFilterType } from '../../types';
+import type { TodoFilterType } from '../../types';
 
 interface TodosFilterProps {
-  filter: TodosFilterType;
-  onChange: (filter: TodosFilterType) => void;
+  filter: TodoFilterType;
+  onChange: (filter: TodoFilterType) => void;
 }
 
 const TodosFilter: FC<TodosFilterProps> = ({ filter, onChange }) => {
