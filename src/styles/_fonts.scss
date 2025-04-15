@@ -10,16 +10,26 @@
     url('../assets/fonts/CreatoDisplay-Thin.ttf') format('ttf');
 }
 
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    local('Montserrat'),
+    url('./../assets/fonts/Montserrat-Regular.woff2') format('woff2'),
+    url('./../assets/fonts/Montserrat-Regular.woff') format('woff'),
+    url('./../assets/fonts/Montserrat-Regular.ttf') format('ttf');
+}
 
-//TODO закинуть файлы монтсеррат
-// @font-face {
-//   font-family: 'Montserrat';
-//   font-style: normal;
-//   font-weight: 500;
-//   font-display: swap;
-//   src:
-//     local('Montserrat'),
-//     url('./../assets/fonts/woff2/Montserrat-Medium.woff2') format('woff2'),
-//     url('./../assets/fonts/woff/Montserrat-Medium.woff') format('woff'),
-//     url('./../assets/fonts/ttf/Montserrat-Medium.ttf') format('ttf');
-// }
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src:
+    local('Montserrat'),
+    url('./../assets/fonts/Montserrat-Light.woff2') format('woff2'),
+    url('./../assets/fonts/Montserrat-Light.woff') format('woff'),
+    url('./../assets/fonts/Montserrat-Light.ttf') format('ttf');
+}

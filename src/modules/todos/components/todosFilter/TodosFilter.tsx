@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import styles from './TodosFilter.module.scss';
 import type { TodoFilterType } from '../../types';
+import Button from '@ui/button/Button';
 
 interface TodosFilterProps {
   filter: TodoFilterType;
@@ -9,31 +10,31 @@ interface TodosFilterProps {
 
 const TodosFilter: FC<TodosFilterProps> = ({ filter, onChange }) => {
   return (
-    <div>
-      <button
-        className={`${styles.button}`}
+    <div className={styles.filters}>
+      <Button
+        active={filter === 'All'}
         onClick={() => {
           onChange('All');
         }}
       >
         All
-      </button>
-      <button
-        className={`${styles.button} ${styles.button_active}`}
+      </Button>
+      <Button
+        active={filter === 'Active'}
         onClick={() => {
           onChange('Active');
         }}
       >
         Active
-      </button>
-      <button
-        className={`${styles.button}`}
+      </Button>
+      <Button
+        active={filter === 'Completed'}
         onClick={() => {
           onChange('Completed');
         }}
       >
         Completed
-      </button>
+      </Button>
     </div>
   );
 };

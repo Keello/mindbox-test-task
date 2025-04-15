@@ -1,8 +1,4 @@
-.button {
-  position: relative;
-  border: none;
-
-  &_active {
-    border: 1px solid black;
-  }
+.filters{
+  display: flex;
+  gap: 10px;
 }

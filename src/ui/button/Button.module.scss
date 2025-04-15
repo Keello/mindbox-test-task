@@ -1,0 +1,17 @@
+@use '@styles/variables' as v;
+
+.button {
+  position: relative;
+  background-color: white;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  font-family: v.$buttonFont;
+  font-size: 1.1rem;
+  padding: 0.125rem .5rem;
+  font-weight: 300;
+  color: black;
+
+  &_active {
+    border: 1px solid v.$primaryColor;
+  }
+}
