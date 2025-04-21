@@ -1,6 +1,6 @@
 import styles from './mainPage.module.scss';
 
-import Logo from '@components/Logo/logo';
+import Logo from '@components/logo/Logo';
 import Todos from '@modules/todos';
 
 const MainPage = () => {

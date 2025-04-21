@@ -5,6 +5,9 @@ import TodosFilter from './todosFilter/TodosFilter';
 import TodosService from '../services/TodosService';
 
 import type { TodoFilterType, TodoType } from '../types';
+import Card from '@ui/card/Card';
+import Button from '@ui/button/Button';
+import Input from '@ui/input/Input';
 
 const Todos = () => {
   const todoService = new TodosService();
@@ -12,7 +15,7 @@ const Todos = () => {
   const [filter, setFilter] = useState<TodoFilterType>('All');
   const [todos, setTodos] = useState<TodoType[]>([]);
 
-  const [active, setActive] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
     fetchTodos();
@@ -31,22 +34,34 @@ const Todos = () => {
 
   const handleChangeFilter = (newFilter: TodoFilterType) => {
     if (newFilter !== filter) {
-      setActive(true);
+      setCollapsed(true);
       setFilter(newFilter);
 
       setTimeout(() => {
-        setActive(false);
+        setCollapsed(false);
       }, 200);
     }
   };
 
+  const handleclearCompleted = () => {
+    console.log('clear');
+  };
+
   return (
-    <div className={styles.container}>
-      <div className={`${styles.card} ${active ? styles.card_active : ''}`}>
-        <TodosList todos={todos} />
-        <TodosFilter filter={filter} onChange={handleChangeFilter} />
-      </div>
-    </div>
+    <Card
+      stackEffect={!collapsed}
+      renderBody={() => (
+        <>
+          <Input placeholder='What needs to be done?'/>
+          <TodosList todos={todos} />
+          <div className={styles.actions}>
+            <span>2 items left</span>
+            <TodosFilter filter={filter} onChange={handleChangeFilter} />
+            <Button onClick={handleclearCompleted}>Clear completed</Button>
+          </div>
+        </>
+      )}
+    />
   );
 };
 

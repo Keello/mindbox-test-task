@@ -10,32 +10,38 @@ interface TodosFilterProps {
 
 const TodosFilter: FC<TodosFilterProps> = ({ filter, onChange }) => {
   return (
-    <div className={styles.filters}>
-      <Button
-        active={filter === 'All'}
-        onClick={() => {
-          onChange('All');
-        }}
-      >
-        All
-      </Button>
-      <Button
-        active={filter === 'Active'}
-        onClick={() => {
-          onChange('Active');
-        }}
-      >
-        Active
-      </Button>
-      <Button
-        active={filter === 'Completed'}
-        onClick={() => {
-          onChange('Completed');
-        }}
-      >
-        Completed
-      </Button>
-    </div>
+    <ul className={styles.filters}>
+      <li>
+        <Button
+          active={filter === 'All'}
+          onClick={() => {
+            onChange('All');
+          }}
+        >
+          All
+        </Button>
+      </li>
+      <li>
+        <Button
+          active={filter === 'Active'}
+          onClick={() => {
+            onChange('Active');
+          }}
+        >
+          Active
+        </Button>
+      </li>
+      <li>
+        <Button
+          active={filter === 'Completed'}
+          onClick={() => {
+            onChange('Completed');
+          }}
+        >
+          Completed
+        </Button>
+      </li>
+    </ul>
   );
 };
 

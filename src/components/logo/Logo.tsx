@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import classes from './logo.module.scss';
+import classes from './Logo.module.scss';
 
 interface LogoProps {
   position?: 'left' | 'center' | 'right';
