@@ -1,0 +1,14 @@
+@use '@styles/variables' as v;
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 15px 10px;
+  border-bottom: 1px solid v.$primaryColor;
+
+  &_completed {
+    color: v.$primaryColor;
+    text-decoration: line-through;
+  }
+}

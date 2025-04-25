@@ -1,9 +1,14 @@
 @use '@styles/variables' as v;
 
+.header{
+  border-bottom: 1px solid v.$primaryColor;
+}
+
 .actions{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 20px;
   font-family: 'CreatoDisplay', sans-serif;
   font-size: 1.1rem;
 }

@@ -10,20 +10,19 @@ $shadowSize: 20px;
 .card {
   position: relative;
   width: 100%;
-  padding: 10px 20px;
   background: white;
   z-index: 10;
   transition: all 0.2s;
-  box-shadow: 0px 0px 10px 2px v.$primaryColor;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.15);
 
   &_stack {
     box-shadow:
-      0px 0px 10px 2px v.$primaryColor,
-      /* Тень верхнего слоя */ 0 1px 1px v.$primaryColor,
-      /* Второй слой */ 0 $shadowSize / 2 0 -5px #eee,
-      /* Тень второго слоя */ 0 $shadowSize / 2 1px -4px v.$primaryColor,
+      0px 0px 10px 2px rgba(0, 0, 0, 0.15),
+      /* Тень верхнего слоя */ 0 1px 1px rgba(0, 0, 0, 0.15),
+      /* Второй слой */ 0 calc($shadowSize / 2) 0 -5px #eee,
+      /* Тень второго слоя */ 0 calc($shadowSize / 2) 1px -4px rgba(0, 0, 0, 0.15),
       /* Третий слой */ 0 $shadowSize 0 -10px #eee,
-      /* Тень третьего слоя */ 0 $shadowSize 1px -9px v.$primaryColor;
+      /* Тень третьего слоя */ 0 $shadowSize 1px -9px rgba(0, 0, 0, 0.15);
   }
 
   &__title {

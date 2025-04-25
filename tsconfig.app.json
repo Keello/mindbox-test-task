@@ -25,6 +25,7 @@
 
     "baseUrl": "src/",
     "paths": {
+      "@assets/*": ["assets/*"],
       "@pages/*": ["pages/*"],
       "@modules/*": ["modules/*"],
       "@components/*": ["components/*"],
@@ -32,6 +33,7 @@
       "@api/*": ["api/*"],
       "@services/*": ["services/*"],
       "@hooks/*": ["hooks/*"],
+      "@styles/*": ["styles/*"],
     }
   },
   "include": ["src", "vite-env.d.ts"]

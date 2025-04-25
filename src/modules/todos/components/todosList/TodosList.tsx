@@ -1,5 +1,7 @@
 import { FC } from 'react';
+import styles from './TodosList.module.scss';
 import type { TodoType } from '../../types';
+import TodosItem from '../todosItem/TodosItem';
 
 interface TodosListProps {
   todos: TodoType[];
@@ -10,9 +12,9 @@ const TodosList: FC<TodosListProps> = ({ todos }) => {
     return <p>Нет данных!</p>;
   }
   return (
-    <ul>
+    <ul className={styles.list}>
       {todos.map((todo) => (
-        <li key={todo.id}>{todo.title}</li>
+        <TodosItem key={todo.id} text={todo.title} completed={todo.completed} />
       ))}
     </ul>
   );
