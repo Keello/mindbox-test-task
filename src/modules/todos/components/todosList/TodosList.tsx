@@ -9,7 +9,7 @@ interface TodosListProps {
 }
 
 const TodosList: FC<TodosListProps> = ({ todos, onChange }) => {
-  const handleChangeItem = (itemID: number, completed: boolean) => { 
+  const handleChangeItem = (itemID: number, completed: boolean) => {
     const newTodos = [...todos].map((todo) => {
       if (todo.id === itemID) {
         return { ...todo, completed };
@@ -21,7 +21,7 @@ const TodosList: FC<TodosListProps> = ({ todos, onChange }) => {
   };
 
   if (todos?.length === 0) {
-    return <p>Нет данных!</p>;
+    return <p className={styles.list__empty}>Нет данных!</p>;
   }
   return (
     <ul className={styles.list}>
