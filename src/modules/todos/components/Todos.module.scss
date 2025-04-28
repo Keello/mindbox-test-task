@@ -1,14 +1,27 @@
 @use '@styles/variables' as v;
 
-.header{
+.header {
   border-bottom: 1px solid v.$primaryColor;
 }
 
-.actions{
+.actions {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
   font-family: 'CreatoDisplay', sans-serif;
   font-size: 1.1rem;
+
+  &__info {
+    flex: 1 1 33.3%;
+  }
+  &__filter {
+    display: flex;
+    justify-content: center;
+    flex: 1 1 33.3%;
+  }
+  &__btn {
+    display: flex;
+    justify-content: end;
+    flex: 1 1 33.3%;
+  }
 }

@@ -15,6 +15,18 @@ const Todos = () => {
 
   const [filter, setFilter] = useState<TodoFilterType>('All');
   const [todos, setTodos] = useState<TodoType[]>([]);
+  const filteredTodos = todos.filter((todo) => {
+    switch (filter) {
+      case 'All':
+        return todo;
+      case 'Active':
+        return todo.completed === false;
+      case 'Completed':
+        return todo.completed === true;
+      default:
+        return todo;
+    }
+  });
 
   const activeTodosCount = todos.reduce((res, cur) => {
     if (cur.completed) {
@@ -31,7 +43,7 @@ const Todos = () => {
 
   const fetchTodos = async () => {
     try {
-      const response = await todoService.getTodos(15);
+      const response = await todoService.getTodos(5);
       if (response) {
         setTodos(response);
       }
@@ -51,8 +63,12 @@ const Todos = () => {
     }
   };
 
+  const handleChangeTodos = (todos: TodoType[]) => {
+    setTodos(todos);
+  };
+
   const handleclearCompleted = () => {
-    console.log('clear');
+    setTodos((prev) => [...prev].map((todo) => ({ ...todo, completed: false })));
   };
 
   return (
@@ -63,11 +79,17 @@ const Todos = () => {
           <div className={styles.header}>
             <Input icon={<ArrowDown />} placeholder="What needs to be done?" />
           </div>
-          <TodosList todos={todos} />
+          <TodosList todos={filteredTodos} onChange={handleChangeTodos} />
           <div className={styles.actions}>
-            <span>{activeTodosCount} items left</span>
-            <TodosFilter filter={filter} onChange={handleChangeFilter} />
-            <Button onClick={handleclearCompleted}>Clear completed</Button>
+            <span className={styles.actions__info}>
+              {activeTodosCount > 0 ? `${activeTodosCount} items left` : 'all tasks completed'}
+            </span>
+            <div className={styles.actions__filter}>
+              <TodosFilter filter={filter} onChange={handleChangeFilter} />
+            </div>
+            <div className={styles.actions__btn}>
+              <Button onClick={handleclearCompleted}>Clear completed</Button>
+            </div>
           </div>
         </>
       )}

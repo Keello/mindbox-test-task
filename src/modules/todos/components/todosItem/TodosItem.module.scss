@@ -6,6 +6,11 @@
   gap: 20px;
   padding: 15px 10px;
   border-bottom: 1px solid v.$primaryColor;
+  cursor: pointer;
+
+  &:hover{
+    background: v.$hoverColor;
+  }
 
   &_completed {
     color: v.$primaryColor;

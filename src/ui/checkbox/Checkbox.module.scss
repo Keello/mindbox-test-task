@@ -2,9 +2,15 @@
 
 .checkbox {
   position: relative;
+  cursor: pointer;
   &__input {
     display: none;
+
+    &:checked + .checkbox__item::after {
+      opacity: 1;
+    }
   }
+
   &__item {
     position: relative;
     display: flex;
@@ -28,7 +34,9 @@
       left: 12px;
       border-bottom: 2px solid v.$primaryColor;
       border-right: 2px solid v.$primaryColor;
+      opacity: 0;
       transform: rotate(45deg) skew(10deg);
+      transition: 0.2s;
     }
   }
 }
