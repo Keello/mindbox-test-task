@@ -10,6 +10,9 @@
       opacity: 1;
     }
   }
+  &:hover .checkbox__item::before {
+    background: v.$hoverColor;
+  }
 
   &__item {
     position: relative;

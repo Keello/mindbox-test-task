@@ -11,6 +11,7 @@ import TodosService from '../services/TodosService';
 import ArrowDown from '@ui/icons/ArrowDown';
 import Loader from '@ui/loader/Loader';
 
+//TODO сделать плавное изменение высоты Card
 const Todos = () => {
   const todoService = new TodosService();
   //для анимации сворачивания тени
