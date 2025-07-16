@@ -11,9 +11,9 @@ export default class TodosService implements ITodoServise {
   private url: string;
 
   constructor() {
-    this.url = 'https://jsonplaceholder.typicode.com/todos';
+    this.url = 'https://jsonplaceholder.typicode.com/todos?userId=1';
   }
-  async getTodos(limit: number): Promise<TodoType[]> {
+  async getTodos(limit?: number): Promise<TodoType[]> {
     try {
       const response = await axios.get(this.url, {
         params: {
@@ -26,7 +26,7 @@ export default class TodosService implements ITodoServise {
       throw error;
     }
   }
-  async addTodo(todo: Partial<TodoType>): Promise<TodoType> {
+  async addTodo(todo: Omit<TodoType, 'id'>): Promise<TodoType> {
     try {
       const response = await axios.post(this.url, todo);
       if (response.status !== 201) {

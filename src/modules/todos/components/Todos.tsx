@@ -12,6 +12,8 @@ import ArrowDown from '@ui/icons/ArrowDown';
 
 const Todos = () => {
   const todoService = new TodosService();
+  //для анимации сворачивания тени
+  const [collapsed, setCollapsed] = useState(false);
 
   const [filter, setFilter] = useState<TodoFilterType>('All');
   const [todos, setTodos] = useState<TodoType[]>([]);
@@ -35,15 +37,13 @@ const Todos = () => {
     return res + 1;
   }, 0);
 
-  const [collapsed, setCollapsed] = useState(false);
-
   useEffect(() => {
     fetchTodos();
   }, []);
 
   const fetchTodos = async () => {
     try {
-      const response = await todoService.getTodos(5);
+      const response = await todoService.getTodos();
       if (response) {
         setTodos(response);
       }
@@ -63,12 +63,29 @@ const Todos = () => {
     }
   };
 
-  const handleChangeTodos = (todos: TodoType[]) => {
-    setTodos(todos);
+  const handleChangeTodos = (itemID: number, completed: boolean) => {
+    const newTodos = [...todos].map((todo) => {
+      if (todo.id === itemID) {
+        return { ...todo, completed };
+      }
+      return todo;
+    });
+
+    setTodos(newTodos);
   };
 
   const handleclearCompleted = () => {
     setTodos((prev) => [...prev].map((todo) => ({ ...todo, completed: false })));
+  };
+
+  const handleAddTodo = async (value: string) => {
+    const newTask = await todoService.addTodo({
+      title: value,
+      userId: 1,
+      completed: false,
+    });
+    // id перезаписан т.к jsonplaceholder всегда возвращает один и тот же
+    setTodos((prev) => [{ ...newTask, id: Date.now() }, ...prev]);
   };
 
   return (
@@ -77,7 +94,11 @@ const Todos = () => {
       renderBody={() => (
         <>
           <div className={styles.header}>
-            <Input icon={<ArrowDown />} placeholder="What needs to be done?" />
+            <Input
+              icon={<ArrowDown />}
+              placeholder="What needs to be done?"
+              onEnter={handleAddTodo}
+            />
           </div>
           <TodosList todos={filteredTodos} onChange={handleChangeTodos} />
           <div className={styles.actions}>
