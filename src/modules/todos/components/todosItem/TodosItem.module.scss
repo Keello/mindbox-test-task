@@ -8,12 +8,30 @@
   border-bottom: 1px solid v.$primaryColor;
   cursor: pointer;
 
-  &:hover{
+  &:hover {
     background: v.$hoverColor;
   }
-
   &_completed {
     color: v.$primaryColor;
     text-decoration: line-through;
+  }
+  &__body{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+$iconSize: 26px;
+.icon {
+  display: flex;
+  flex: 0 0 auto;
+  width: $iconSize;
+  height: $iconSize;
+  fill: v.$primaryColor;
+
+  &:hover {
+    color: v.$dangerColor;
   }
 }

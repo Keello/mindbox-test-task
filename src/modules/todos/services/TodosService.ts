@@ -4,18 +4,19 @@ import { TodoType } from '../types';
 export interface ITodoServise {
   getTodos: (limit: number) => Promise<TodoType[]>;
   addTodo(todo: Partial<TodoType>): Promise<TodoType>;
-  deleteTodo(id: number): Promise<number>;
+  deleteTodo(id: number): Promise<boolean>;
 }
 
 export default class TodosService implements ITodoServise {
   private url: string;
 
   constructor() {
-    this.url = 'https://jsonplaceholder.typicode.com/todos?userId=1';
+    this.url = 'https://jsonplaceholder.typicode.com/todos';
   }
   async getTodos(limit?: number): Promise<TodoType[]> {
     try {
-      const response = await axios.get(this.url, {
+      //userId для упрощения
+      const response = await axios.get(this.url + '?userId=1', {
         params: {
           _limit: limit,
         },
@@ -38,13 +39,13 @@ export default class TodosService implements ITodoServise {
       throw error;
     }
   }
-  async deleteTodo(id: number): Promise<number> {
+  async deleteTodo(id: number): Promise<boolean> {
     try {
       const response = await axios.delete(`${this.url}/${id}`);
       if (response.status !== 200) {
         throw new Error('Ошибка удаления дела');
       }
-      return id;
+      return true;
     } catch (error) {
       console.error(error);
       throw error;

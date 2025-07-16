@@ -5,10 +5,11 @@ import TodosItem from '../todosItem/TodosItem';
 
 interface TodosListProps {
   todos: TodoType[];
-  onChange: (todoID: number, isCompleted: boolean) => void;
+  onChangeItem: (todoID: number, isCompleted: boolean) => void;
+  onDeleteItem: (todoID: number) => void;
 }
 
-const TodosList: FC<TodosListProps> = ({ todos, onChange }) => {
+const TodosList: FC<TodosListProps> = ({ todos, onChangeItem, onDeleteItem }) => {
   if (todos?.length === 0) {
     return <p className={styles.list__empty}>Нет данных!</p>;
   }
@@ -20,7 +21,10 @@ const TodosList: FC<TodosListProps> = ({ todos, onChange }) => {
           text={todo.title}
           completed={todo.completed}
           onChange={(completed) => {
-            onChange(todo.id, completed);
+            onChangeItem(todo.id, completed);
+          }}
+          onDelete={() => {
+            onDeleteItem(todo.id);
           }}
         />
       ))}

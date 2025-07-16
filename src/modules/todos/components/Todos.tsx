@@ -9,12 +9,14 @@ import Input from '@ui/input/Input';
 import type { TodoFilterType, TodoType } from '../types';
 import TodosService from '../services/TodosService';
 import ArrowDown from '@ui/icons/ArrowDown';
+import Loader from '@ui/loader/Loader';
 
 const Todos = () => {
   const todoService = new TodosService();
   //для анимации сворачивания тени
   const [collapsed, setCollapsed] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
   const [filter, setFilter] = useState<TodoFilterType>('All');
   const [todos, setTodos] = useState<TodoType[]>([]);
   const filteredTodos = todos.filter((todo) => {
@@ -79,6 +81,7 @@ const Todos = () => {
   };
 
   const handleAddTodo = async (value: string) => {
+    setIsLoading(true);
     const newTask = await todoService.addTodo({
       title: value,
       userId: 1,
@@ -86,6 +89,16 @@ const Todos = () => {
     });
     // id перезаписан т.к jsonplaceholder всегда возвращает один и тот же
     setTodos((prev) => [{ ...newTask, id: Date.now() }, ...prev]);
+    setIsLoading(false);
+  };
+
+  const handleDeleteTodo = async (todoID: number) => {
+    setIsLoading(true);
+    const isDeleted = await todoService.deleteTodo(todoID);
+    if (isDeleted) {
+      setTodos((prev) => prev.filter((item) => item.id !== todoID));
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -93,6 +106,7 @@ const Todos = () => {
       stackEffect={!collapsed}
       renderBody={() => (
         <>
+          {isLoading && <Loader type="fluid" />}
           <div className={styles.header}>
             <Input
               icon={<ArrowDown />}
@@ -100,7 +114,11 @@ const Todos = () => {
               onEnter={handleAddTodo}
             />
           </div>
-          <TodosList todos={filteredTodos} onChange={handleChangeTodos} />
+          <TodosList
+            todos={filteredTodos}
+            onChangeItem={handleChangeTodos}
+            onDeleteItem={handleDeleteTodo}
+          />
           <div className={styles.actions}>
             <span className={styles.actions__info}>
               {activeTodosCount > 0 ? `${activeTodosCount} items left` : 'all tasks completed'}
