@@ -18,7 +18,11 @@ const Todos = () => {
   //для анимации сворачивания тени
   const [collapsed, setCollapsed] = useState(false);
 
+  //сколько мс показывать сообщение об ошибке в запросе
+  const SHOW_ERRORS_TIMEOUT = 3000;
+
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [filter, setFilter] = useState<TodoFilterType>('All');
   const [todos, setTodos] = useState<TodoType[]>([]);
   const filteredTodos = todos.filter((todo) => {
@@ -56,6 +60,7 @@ const Todos = () => {
     }
   };
 
+  
   const handleChangeFilter = (newFilter: TodoFilterType) => {
     if (newFilter !== filter) {
       setCollapsed(true);
@@ -67,6 +72,7 @@ const Todos = () => {
     }
   };
 
+  // изменяет статус у todo
   const handleChangeTodos = (itemID: number, completed: boolean) => {
     const newTodos = [...todos].map((todo) => {
       if (todo.id === itemID) {
@@ -83,24 +89,54 @@ const Todos = () => {
   };
 
   const handleAddTodo = async (value: string) => {
-    setIsLoading(true);
-    const newTask = await todoService.addTodo({
-      title: value,
-      userId: 1,
-      completed: false,
-    });
-    // id перезаписан т.к jsonplaceholder всегда возвращает один и тот же
-    setTodos((prev) => [{ ...newTask, id: Date.now() }, ...prev]);
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      const newTask = await todoService.addTodo({
+        title: value,
+        userId: 1,
+        completed: false,
+      });
+      // id перезаписан т.к jsonplaceholder всегда возвращает один и тот же
+      setTodos((prev) => [{ ...newTask, id: Date.now() }, ...prev]);
+    } catch (error) {
+      if (
+        error &&
+        typeof error === 'object' &&
+        'message' in error &&
+        typeof error.message === 'string'
+      ) {
+        setErrorMessage(error.message);
+        setTimeout(() => {
+          setErrorMessage('');
+        }, SHOW_ERRORS_TIMEOUT);
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleDeleteTodo = async (todoID: number) => {
-    setIsLoading(true);
-    const isDeleted = await todoService.deleteTodo(todoID);
-    if (isDeleted) {
-      setTodos((prev) => prev.filter((item) => item.id !== todoID));
+    try {
+      setIsLoading(true);
+      const isDeleted = await todoService.deleteTodo(todoID);
+      if (isDeleted) {
+        setTodos((prev) => prev.filter((item) => item.id !== todoID));
+      }
+    } catch (error) {
+      if (
+        error &&
+        typeof error === 'object' &&
+        'message' in error &&
+        typeof error.message === 'string'
+      ) {
+        setErrorMessage(error.message);
+        setTimeout(() => {
+          setErrorMessage('');
+        }, SHOW_ERRORS_TIMEOUT);
+      }
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (
@@ -115,6 +151,7 @@ const Todos = () => {
               placeholder="What needs to be done?"
               onEnter={handleAddTodo}
             />
+            <span className={styles.errorWrapper}>{errorMessage}</span>
           </div>
           <ChangeHeightMotion reanimate={filteredTodos} easeWithSpring={false} duration={0.2}>
             <TodosList
@@ -123,7 +160,6 @@ const Todos = () => {
               onDeleteItem={handleDeleteTodo}
             />
           </ChangeHeightMotion>
-
           <div className={styles.actions}>
             <span className={styles.actions__info}>
               {activeTodosCount > 0 ? `${activeTodosCount} items left` : 'all tasks completed'}

@@ -4,6 +4,14 @@
   border-bottom: 1px solid v.$primaryColor;
 }
 
+.errorWrapper{
+  position: absolute;
+  right: 15px;
+  top: 5px;
+  color: v.$dangerColor;
+  font-weight: bold;
+}
+
 .actions {
   display: flex;
   align-items: center;
