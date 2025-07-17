@@ -14,6 +14,7 @@ $shadowSize: 20px;
   z-index: 10;
   transition: all 0.2s;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
 
   &_stack {
     box-shadow:

@@ -10,6 +10,7 @@ import type { TodoFilterType, TodoType } from '../types';
 import TodosService from '../services/TodosService';
 import ArrowDown from '@ui/icons/ArrowDown';
 import Loader from '@ui/loader/Loader';
+import ChangeHeightMotion from '@hoc/animations/ChangeHeightMotion';
 
 //TODO сделать плавное изменение высоты Card
 const Todos = () => {
@@ -115,11 +116,14 @@ const Todos = () => {
               onEnter={handleAddTodo}
             />
           </div>
-          <TodosList
-            todos={filteredTodos}
-            onChangeItem={handleChangeTodos}
-            onDeleteItem={handleDeleteTodo}
-          />
+          <ChangeHeightMotion reanimate={filteredTodos} easeWithSpring={false} duration={0.2}>
+            <TodosList
+              todos={filteredTodos}
+              onChangeItem={handleChangeTodos}
+              onDeleteItem={handleDeleteTodo}
+            />
+          </ChangeHeightMotion>
+
           <div className={styles.actions}>
             <span className={styles.actions__info}>
               {activeTodosCount > 0 ? `${activeTodosCount} items left` : 'all tasks completed'}

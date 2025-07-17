@@ -26,6 +26,7 @@ $iconSize: 26px;
   width: $iconSize;
   height: $iconSize;
   fill: v.$primaryColor;
+  cursor: pointer;
 
   &:hover {
     color: v.$dangerColor;

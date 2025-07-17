@@ -27,6 +27,7 @@
     "paths": {
       "@assets/*": ["assets/*"],
       "@pages/*": ["pages/*"],
+      "@hoc/*": ["hoc/*"],
       "@modules/*": ["modules/*"],
       "@components/*": ["components/*"],
       "@ui/*": ["ui/*"],
