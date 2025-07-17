@@ -4,7 +4,7 @@
   border-bottom: 1px solid v.$primaryColor;
 }
 
-.errorWrapper{
+.errorWrapper {
   position: absolute;
   right: 15px;
   top: 5px;
@@ -18,6 +18,10 @@
   padding: 10px 20px;
   font-family: 'CreatoDisplay', sans-serif;
   font-size: 1.1rem;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 5px;
+  }
 
   &__info {
     flex: 1 1 33.3%;

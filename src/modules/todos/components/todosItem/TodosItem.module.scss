@@ -7,15 +7,20 @@
   padding: 15px 10px;
   border-bottom: 1px solid v.$primaryColor;
 
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
+
   &_completed {
     color: v.$primaryColor;
     text-decoration: line-through;
   }
-  &__body{
+  &__body {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    gap: 5px;
   }
 }
 
